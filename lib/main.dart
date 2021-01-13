@@ -27,15 +27,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int currentPage = 0; // Setting current page value
   GlobalKey bottomNavigationKey = GlobalKey();
-
-
-  int _counter = 0; // Old content
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
