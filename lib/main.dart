@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ressources_relationnelles/widgets/cool_bottom_navigation.dart';
 
-void main() {
-  runApp(MyApp());
-}
+import 'login.dart';
+
+void main() {runApp(MyApp());}
 
 class MyApp extends StatelessWidget {
   @override
@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
   GlobalKey bottomNavigationKey = GlobalKey();
 
 
-  int _counter = 0;
+  int _counter = 0; // Old content
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -42,25 +42,17 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: Container(
+        decoration: BoxDecoration(color: Colors.white),
+        child: Center(
+          child: _getPage(currentPage),
         ),
       ),
       bottomNavigationBar: CoolBottomNavigation(
         tabs: [
           TabData(
               iconData: Icons.home,
-              title: "Home",
+              title: "Accueil",
               onclick: () {
                 final CoolBottomNavigationState fState =
                     bottomNavigationKey.currentState;
@@ -71,8 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
               title: "Recherche"
               ),
           TabData(
-              iconData: Icons.shopping_cart,
-              title: "Panier"
+              iconData: Icons.supervisor_account,
+              title: "Mon profil",
+              onclick: () => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LoginPage()))
           )
         ],
         initialSelection: 1,
@@ -83,11 +77,79 @@ class _MyHomePageState extends State<MyHomePage> {
           });
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+
+
+  _getPage(int page) {
+    switch (page) {
+      case 0:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text("C'est la page d'accueil"),
+            RaisedButton(
+              child: Text(
+                "Se connecter",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Theme.of(context).primaryColor,
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => LoginPage()));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Mon profil",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Theme.of(context).accentColor,
+              onPressed: () {
+                final CoolBottomNavigationState fState =
+                    bottomNavigationKey.currentState;
+                fState.setPage(2);
+              },
+            )
+          ],
+        );
+      case 1:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text("Page de recherche"),
+            RaisedButton(
+              child: Text(
+                "Ouvre le bloc mais doit etre deplace en header",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Theme.of(context).primaryColor,
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => LoginPage()));
+              },
+            )
+          ],
+        );
+      default:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text("Page de profil"),
+            RaisedButton(
+              child: Text(
+                "A besoin d'une splash page pour le login ou register",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Theme.of(context).primaryColor,
+              onPressed: () {},
+            )
+          ],
+        );
+    }
+  }
+
+
+
 }
