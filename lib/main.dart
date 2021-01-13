@@ -40,7 +40,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
+        elevation: 10,
+        leading: Icon(Icons.menu),
         title: Text(widget.title),
+        actions: <Widget>[
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.white),
@@ -79,9 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-
-
+  // Cool bottom navbar routes content
   _getPage(int page) {
     switch (page) {
       case 0:
