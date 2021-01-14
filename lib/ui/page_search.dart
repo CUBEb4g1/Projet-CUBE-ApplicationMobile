@@ -26,16 +26,16 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
 
     premiumList
-    ..add(Resource(resourceName:"Omkar Lotus", resourceDesc:"Ahmedabad ", image:"feature_1.jpg", resourceRelation:"26.5 Cr"))
-    ..add(Resource(resourceName:"Sandesh Heights", resourceDesc:"Baroda ", image:"feature_2.jpg", resourceRelation:"11.5 Cr"))
-    ..add(Resource(resourceName:"Sangath Heights", resourceDesc:"Pune ", image:"feature_3.jpg", resourceRelation:"19.0 Cr"))
-    ..add(Resource(resourceName:"Adani HighRise", resourceDesc:"Mumbai ", image:"hall_1.jpg", resourceRelation:"22.5 Cr"))
-    ..add(Resource(resourceName:"N.G Tower", resourceDesc:"Gandhinagar ", image:"hall_2.jpeg", resourceRelation:"7.5 Cr"))
-    ..add(Resource(resourceName:"Vishwas CityRise", resourceDesc:"Pune ", image:"hall_1.jpg", resourceRelation:"17.5 Cr"))
-    ..add(Resource(resourceName:"Gift City", resourceDesc:"Ahmedabad ", image:"hall_2.jpeg", resourceRelation:"13.5 Cr"))
-    ..add(Resource(resourceName:"Velone City", resourceDesc:"Mumbai ", image:"feature_1.jpg", resourceRelation:"11.5 Cr"))
-    ..add(Resource(resourceName:"PabelBay", resourceDesc:"Ahmedabad ", image:"hall_1.jpg", resourceRelation:"33.1 Cr"))
-    ..add(Resource(resourceName:"Sapath Hexa Tower", resourceDesc:"Ahmedabad", image:"feature_3.jpg", resourceRelation:"15.6 Cr"));
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_1.jpg", resourceRelation:"Public"))
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_2.jpg", resourceRelation:"Public"))
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_3.jpg", resourceRelation:"Public"))
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_1.jpg", resourceRelation:"Public"))
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_2.jpeg", resourceRelation:"Public"))
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_1.jpg", resourceRelation:"Public"))
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_2.jpeg", resourceRelation:"Public"))
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_1.jpg", resourceRelation:"Public"))
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_1.jpg", resourceRelation:"Public"))
+    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_3.jpg", resourceRelation:"Public"));
 
 
 
@@ -100,7 +100,7 @@ class _SearchPageState extends State<SearchPage> {
             HorizontalList(
               children: <Widget>[
                 for (int i = 0; i < premiumList.length; i++)
-                  propertyCard(premiumList[i])
+                  resourceCard(premiumList[i])
               ],
             ),
             leftAlignText(
@@ -111,7 +111,7 @@ class _SearchPageState extends State<SearchPage> {
             HorizontalList(
               children: <Widget>[
                 for (int i = 0; i < premiumList.length; i++)
-                  propertyCard(premiumList.reversed.toList()[i])
+                  resourceCard(premiumList.reversed.toList()[i])
 
               ],
             )
@@ -209,7 +209,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Card propertyCard(Resource property) {
+  Card resourceCard(Resource property) {
     return Card(
         elevation: 4.0,
         margin: EdgeInsets.all(8),
