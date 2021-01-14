@@ -1,9 +1,8 @@
-library cool_bottom_navigation;
-
+// Import lib modules
+import 'package:flutter/material.dart';
 import 'package:ressources_relationnelles/widgets/cool_bottom_navigation_options/tab_item.dart';
 import 'package:ressources_relationnelles/widgets/cool_bottom_navigation_options/half_clipper.dart';
 import 'package:ressources_relationnelles/widgets/cool_bottom_navigation_options/half_painter.dart';
-import 'package:flutter/material.dart';
 
 const double CIRCLE_SIZE = 60;
 const double ARC_HEIGHT = 70;
