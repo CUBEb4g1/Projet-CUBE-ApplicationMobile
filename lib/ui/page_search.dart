@@ -187,7 +187,7 @@ class _SearchPageState extends State<SearchPage> {
         color: colorCurve,
         onPressed: () {
           // Going to Login page
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
         },
       ),
     );

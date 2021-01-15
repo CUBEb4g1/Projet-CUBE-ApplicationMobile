@@ -86,7 +86,8 @@ class _PageForgotPasswordState extends State<PageForgotPassword> {
 
   GradientText _forgotGradientText() {
     return GradientText('Mot de passe oublie',
-        gradient: LinearGradient(colors: [
+        gradient: LinearGradient(
+            colors: [
           Color.fromRGBO(15, 175, 150, 1),
           Color.fromRGBO(99, 255, 150, 1)
         ]),
