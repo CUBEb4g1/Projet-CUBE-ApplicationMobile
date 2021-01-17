@@ -1,9 +1,10 @@
 class Resource {
   String id;
-  String resourceName;
+  var resourceName;
   String resourceRelation;
   String resourceDesc;
   String resource;
   String image;
-  Resource({this.id, this.resourceName, this.resourceRelation, this.resourceDesc,this.image});
+  // ignore: non_constant_identifier_names
+  Resource({this.id, this.resourceRelation, this.resourceName, this.resourceDesc,this.image});
 }
