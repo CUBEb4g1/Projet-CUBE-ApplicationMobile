@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:flutter/foundation.dart';
 
-class HttpService {
+class HTTPServiceResource {
   Future<List<Resources>> getTopLikeResources() async {
     Response res = await get("http://ressources-relationnelles.rayformatics.fr/api/resources/top/like");
 

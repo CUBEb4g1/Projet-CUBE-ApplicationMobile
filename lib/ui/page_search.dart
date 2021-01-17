@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ressources_relationnelles/api/http_service.dart';
+import 'package:ressources_relationnelles/api/http_service_resource.dart';
 import 'package:ressources_relationnelles/models/models.dart';
 import 'package:ressources_relationnelles/utils/utils.dart';
 import 'package:ressources_relationnelles/widgets/widgets.dart';
@@ -29,7 +29,7 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    final HttpService httpService = HttpService();
+    final HTTPServiceResource httpService = new HTTPServiceResource();
 
     httpService.getTopLikeResources().then((value) {
       value.toList().forEach((element) {
