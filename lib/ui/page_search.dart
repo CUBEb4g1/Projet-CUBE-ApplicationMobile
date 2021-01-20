@@ -1,6 +1,9 @@
 // Import lib modules
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ressources_relationnelles/api/http_service_resource.dart';
 import 'package:ressources_relationnelles/models/models.dart';
 import 'package:ressources_relationnelles/utils/utils.dart';
 import 'package:ressources_relationnelles/widgets/widgets.dart';
@@ -11,6 +14,8 @@ class SearchPage extends StatefulWidget {
   @override
   _SearchPageState createState() => _SearchPageState();
 }
+
+
 
 class _SearchPageState extends State<SearchPage> {
   Screen size;
@@ -24,21 +29,45 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    final HTTPServiceResource httpService = new HTTPServiceResource();
 
-    premiumList
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_1.jpg", resourceRelation:"Public"))
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_2.jpg", resourceRelation:"Public"))
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_3.jpg", resourceRelation:"Public"))
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_1.jpg", resourceRelation:"Public"))
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_2.jpeg", resourceRelation:"Public"))
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_1.jpg", resourceRelation:"Public"))
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_2.jpeg", resourceRelation:"Public"))
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_1.jpg", resourceRelation:"Public"))
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"hall_1.jpg", resourceRelation:"Public"))
-    ..add(Resource(resourceName:"Mon titre", resourceDesc:"The description", image:"feature_3.jpg", resourceRelation:"Public"));
+    httpService.getTopLikeResources().then((value) {
+      value.toList().forEach((element) {
 
+          List images = [
+            "feature_1.jpg",
+            "feature_2.jpg",
+            "feature_3.jpg",
+            "hall_1.jpg",
+            "hall_2.jpeg",
+          ];
 
+          var rn = new Random();
+          String img = images[rn.nextInt(images.length)];
 
+          premiumList
+            ..add(Resource(resourceName:element.title, resourceDesc:element.content, image:img, resourceRelation:"Public"));
+      });
+    });
+
+    httpService.getTopViewsResources().then((value) {
+      value.toList().forEach((element) {
+
+          List images = [
+            "feature_1.jpg",
+            "feature_2.jpg",
+            "feature_3.jpg",
+            "hall_1.jpg",
+            "hall_2.jpeg",
+          ];
+
+          var rn = new Random();
+          String img = images[rn.nextInt(images.length)];
+
+          featuredList
+            ..add(Resource(resourceName:element.title, resourceDesc:element.content, image:img, resourceRelation:"Public"));
+      });
+    });
   }
 
   @override
@@ -110,8 +139,8 @@ class _SearchPageState extends State<SearchPage> {
                 fontSize: 16.0),
             HorizontalList(
               children: <Widget>[
-                for (int i = 0; i < premiumList.length; i++)
-                  resourceCard(premiumList.reversed.toList()[i])
+                for (int i = 0; i < featuredList.length; i++)
+                  resourceCard(featuredList.reversed.toList()[i])
 
               ],
             )
@@ -199,6 +228,7 @@ class _SearchPageState extends State<SearchPage> {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(text??"",
+            overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontFamily: 'Exo2',
@@ -274,4 +304,8 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
+
 }
+
+
+
