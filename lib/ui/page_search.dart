@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ressources_relationnelles/api/http_service_resource.dart';
 import 'package:ressources_relationnelles/models/models.dart';
+import 'package:ressources_relationnelles/ui/resources/resource_detail.dart';
 import 'package:ressources_relationnelles/utils/utils.dart';
 import 'package:ressources_relationnelles/widgets/widgets.dart';
 // Import pages
@@ -46,7 +47,7 @@ class _SearchPageState extends State<SearchPage> {
           String img = images[rn.nextInt(images.length)];
 
           premiumList
-            ..add(Resource(resourceName:element.title, resourceDesc:element.content, image:img, resourceRelation:"Public"));
+            ..add(Resource(id: element.id, resourceName:element.title, resourceDesc:element.content, image:img, resourceRelation:"Public"));
       });
     });
 
@@ -65,7 +66,7 @@ class _SearchPageState extends State<SearchPage> {
           String img = images[rn.nextInt(images.length)];
 
           featuredList
-            ..add(Resource(resourceName:element.title, resourceDesc:element.content, image:img, resourceRelation:"Public"));
+            ..add(Resource(id: element.id, resourceName:element.title, resourceDesc:element.content, image:img, resourceRelation:"Public"));
       });
     });
   }
@@ -129,21 +130,23 @@ class _SearchPageState extends State<SearchPage> {
             HorizontalList(
               children: <Widget>[
                 for (int i = 0; i < premiumList.length; i++)
-                  resourceCard(premiumList[i])
+                  resourceCard(premiumList.reversed.toList()[i])
+
               ],
             ),
             leftAlignText(
                 text: "Ressources les plus consultees",
                 leftPadding: size.getWidthPx(16),
                 textColor: textPrimaryColor,
-                fontSize: 16.0),
+                fontSize: 16.0
+            ),
             HorizontalList(
               children: <Widget>[
                 for (int i = 0; i < featuredList.length; i++)
                   resourceCard(featuredList.reversed.toList()[i])
 
               ],
-            )
+            ),
           ],
         ),
       ],
@@ -245,38 +248,42 @@ class _SearchPageState extends State<SearchPage> {
         margin: EdgeInsets.all(8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         borderOnForeground: true,
-        child: Container(
-            height: size.getWidthPx(150),
-            width: size.getWidthPx(170),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                ClipRRect(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12.0),
-                        topRight: Radius.circular(12.0)),
-                    child: Image.asset('assets/${property.image}',
-                        fit: BoxFit.fill)),
-                SizedBox(height: size.getWidthPx(8)),
-                leftAlignText(
-                    text: property.resourceName,
-                    leftPadding: size.getWidthPx(8),
-                    textColor: colorCurve,
-                    fontSize: 14.0),
-                leftAlignText(
-                    text: property.resourceDesc,
-                    leftPadding: size.getWidthPx(8),
-                    textColor: Colors.black54,
-                    fontSize: 12.0),
-                SizedBox(height: size.getWidthPx(4)),
-                leftAlignText(
-                    text: property.resourceRelation,
-                    leftPadding: size.getWidthPx(8),
-                    textColor: colorCurve,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w800),
-              ],
-            )));
+        child: InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ResourceDetail(property.id, property.resourceName)));
+            },
+            child: Container(
+              height: size.getWidthPx(150),
+              width: size.getWidthPx(170),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12.0),
+                          topRight: Radius.circular(12.0)),
+                      child: Image.asset('assets/${property.image}',
+                          fit: BoxFit.fill)),
+                  SizedBox(height: size.getWidthPx(8)),
+                  leftAlignText(
+                      text: property.resourceName,
+                      leftPadding: size.getWidthPx(8),
+                      textColor: colorCurve,
+                      fontSize: 14.0),
+                  leftAlignText(
+                      text: property.resourceDesc,
+                      leftPadding: size.getWidthPx(8),
+                      textColor: Colors.black54,
+                      fontSize: 12.0),
+                  SizedBox(height: size.getWidthPx(4)),
+                  leftAlignText(
+                      text: property.resourceRelation,
+                      leftPadding: size.getWidthPx(8),
+                      textColor: colorCurve,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w800),
+                ],
+            ))));
   }
 
   Padding buildChoiceChip(index, chipName) {

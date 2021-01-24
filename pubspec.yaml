@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   fancy_bottom_navigation: ^0.3.2
   http:
+  html:
+  flutter_html:
 
 
   # The following adds the Cupertino Icons font to your application.
