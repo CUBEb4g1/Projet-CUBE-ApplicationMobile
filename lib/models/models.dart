@@ -1,5 +1,5 @@
 class Resource {
-  String id;
+  int id;
   var resourceName;
   String resourceRelation;
   String resourceDesc;
