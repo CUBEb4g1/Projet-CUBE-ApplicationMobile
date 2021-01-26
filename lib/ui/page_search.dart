@@ -130,7 +130,7 @@ class _SearchPageState extends State<SearchPage> {
             HorizontalList(
               children: <Widget>[
                 for (int i = 0; i < premiumList.length; i++)
-                  resourceCard(premiumList.reversed.toList()[i])
+                  resourceCard(premiumList.toList()[i])
 
               ],
             ),
@@ -143,7 +143,7 @@ class _SearchPageState extends State<SearchPage> {
             HorizontalList(
               children: <Widget>[
                 for (int i = 0; i < featuredList.length; i++)
-                  resourceCard(featuredList.reversed.toList()[i])
+                  resourceCard(featuredList.toList()[i])
 
               ],
             ),
@@ -271,7 +271,7 @@ class _SearchPageState extends State<SearchPage> {
                       textColor: colorCurve,
                       fontSize: 14.0),
                   leftAlignText(
-                      text: property.resourceDesc,
+                      text: "Description",
                       leftPadding: size.getWidthPx(8),
                       textColor: Colors.black54,
                       fontSize: 12.0),
