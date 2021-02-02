@@ -1,11 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:flutter/foundation.dart';
 
 class HTTPServiceResource {
   Future<List<Resources>> getTopLikeResources() async {
-    Response res = await get("http://ressources-relationnelles.rayformatics.fr/api/resources/top/like");
+    Response res = await get("https://ressources-relationnelles.rayformatics.fr/api/resources/top/like");
 
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
@@ -23,7 +24,7 @@ class HTTPServiceResource {
   }
 
   Future<List<Resources>> getTopViewsResources() async {
-    Response res = await get("http://ressources-relationnelles.rayformatics.fr/api/resources/top/views");
+    Response res = await get("https://ressources-relationnelles.rayformatics.fr/api/resources/top/views");
 
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
@@ -40,7 +41,8 @@ class HTTPServiceResource {
     }
   }
   Future<FullResources> getDetailledResource(int id) async {
-    final response = await get('http://ressources-relationnelles.rayformatics.fr/api/resources/$id');
+
+    final response = await get('https://ressources-relationnelles.rayformatics.fr/api/resources/$id');
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -51,6 +53,22 @@ class HTTPServiceResource {
       // then throw an exception.
       throw Exception('Failed to load album');
     }
+  }
+
+  Future<Map> createResource (String title, String content) async {
+    String url = "https://ressources-relationnelles.rayformatics.fr/api/resources/create";
+    final response = await post(
+        url,
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        body: jsonEncode({'title': title, 'content': content}),
+    );
+
+    if (response.statusCode == 200) {
+      Map json = jsonDecode(response.body);
+      return json;
+    }
+
+
   }
 }
 

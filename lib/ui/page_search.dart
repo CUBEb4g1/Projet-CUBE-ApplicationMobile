@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ressources_relationnelles/api/http_service_resource.dart';
 import 'package:ressources_relationnelles/models/models.dart';
+import 'package:ressources_relationnelles/ui/resources/resource_creation.dart';
 import 'package:ressources_relationnelles/ui/resources/resource_detail.dart';
 import 'package:ressources_relationnelles/utils/utils.dart';
 import 'package:ressources_relationnelles/widgets/widgets.dart';
@@ -121,7 +122,7 @@ class _SearchPageState extends State<SearchPage> {
                 children: <Widget>[
                   titleWidget(),
                   SizedBox(height: size.getWidthPx(10)),
-                  upperBoxCard(),
+                  createRessourceButton(),
                   _loginButtonWidget(),
                 ],
               ),
@@ -166,6 +167,31 @@ class _SearchPageState extends State<SearchPage> {
             color: Colors.white));
   }
 
+  Container createRessourceButton()
+  {
+    return Container(
+      padding: EdgeInsets.symmetric(
+          vertical: size.getWidthPx(20), horizontal: size.getWidthPx(16)),
+      width: size.getWidthPx(200),
+      child: RaisedButton(
+        elevation: 8.0,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        padding: EdgeInsets.all(size.getWidthPx(5)),
+        child: Text(
+          "Créer une ressource",
+          style: TextStyle(fontFamily: 'Exo2',color: Colors.white, fontSize: 20.0),
+          textAlign: TextAlign.center,
+        ),
+        color: colorCurve,
+        onPressed: () {
+          // Going to Login page
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ResourceCreation('Test Post')));
+        },
+      ),
+    );
+  }
+
   Card upperBoxCard() {
     return Card(
         elevation: 4.0,
@@ -177,7 +203,7 @@ class _SearchPageState extends State<SearchPage> {
           height: size.getWidthPx(150),
           child: Column(
             children: <Widget>[
-              _searchWidget(),
+              // _searchWidget(),
               leftAlignText(
                   text: "Top categories :",
                   leftPadding: size.getWidthPx(16),
@@ -219,6 +245,7 @@ class _SearchPageState extends State<SearchPage> {
         child: Text(
           "JE ME CONNECTE",
           style: TextStyle(fontFamily: 'Exo2',color: Colors.white, fontSize: 20.0),
+          textAlign: TextAlign.center,
         ),
         color: colorCurve,
         onPressed: () {
