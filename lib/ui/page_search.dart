@@ -29,10 +29,9 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     final HTTPServiceResource httpService = new HTTPServiceResource();
 
-    httpService.getTopLikeResources().then((value) {
+    httpService.getTopLikeResources().then((value) async{
       value.toList().forEach((element) {
 
           List images = [
@@ -49,10 +48,11 @@ class _SearchPageState extends State<SearchPage> {
           premiumList
             ..add(Resource(id: element.id, resourceName:element.title, resourceDesc:element.content, image:img, resourceRelation:"Public"));
       });
+      setState(() {});
     });
 
-    httpService.getTopViewsResources().then((value) {
-      value.toList().forEach((element) {
+    httpService.getTopViewsResources().then((value) async{
+       value.toList().forEach((element) {
 
           List images = [
             "feature_1.jpg",
@@ -68,7 +68,11 @@ class _SearchPageState extends State<SearchPage> {
           featuredList
             ..add(Resource(id: element.id, resourceName:element.title, resourceDesc:element.content, image:img, resourceRelation:"Public"));
       });
+
+       setState(() {});
     });
+
+    super.initState();
   }
 
   @override
